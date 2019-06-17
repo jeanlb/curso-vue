@@ -3,17 +3,25 @@
 <div id="app">
   <input type="text" v-on:input="alterarTitulo" />
   <p>{{ titulo }}</p>
+  <p>{{ saudacao() }}</p>
+  <p v-once>{{ titulo }}</p>
+  <a v-bind:href="link" target="_blank">Google</a>
 </div>
 
 <script>
 	new Vue({
 		el: '#app',
 		data: {
-			titulo: "Usando VueJS 2"
+			titulo: 'Usando VueJS 2',
+			link: 'http://www.google.com.br'
 		},
 		methods: {
 			alterarTitulo(event) {
-				this.titulo = event.target.value
+				this.titulo = event.target.value;
+			},
+			saudacao() {
+				console.log(this);
+				return this.titulo;
 			}
 		}
 	})
