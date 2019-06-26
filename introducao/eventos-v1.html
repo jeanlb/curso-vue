@@ -9,6 +9,7 @@
   		<span v-on:mousemove.stop.prevent>Parar aqui!!!!</span>
   </p>
   <button v-on:click="reset">Reset</button>
+  <p><input type="text" v-on:keyup.enter="exibirAlerta"></p>
 </div>
 
 <script>
@@ -36,6 +37,9 @@
 				this.contador = 0;
 				this.x = 0;
 				this.y = 0;
+			},
+			exibirAlerta() {
+				alert('Você teclou Enter!');
 			}
 		}
 	})
