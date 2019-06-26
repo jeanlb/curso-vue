@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ contador }}</p>
+  <button v-on:click="incrementar">Incrementar 1</button>
+  <button v-on:click="incrementarUsandoParametro(5, $event)">Incrementar 5</button>
+  <p v-on:mousemove="atualizarXY">
+  		Mouse: {{ x }} e {{ y }}
+  		<span v-on:mousemove.stop.prevent>Parar aqui!!!!</span>
+  </p>
+  <button v-on:click="reset">Reset</button>
+</div>
+
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			contador: 0,
+			x: 0,
+			y: 0
+		},
+		methods: {
+			incrementar() {
+				this.contador++;
+			},
+			incrementarUsandoParametro(valorIncremento, ev) {
+				console.log(valorIncremento, ev);
+				this.contador += valorIncremento;
+			},
+			atualizarXY(event) {
+				console.log(event);
+				this.x = event.clientX; //propriedade referente a posicao do mouse no evento mousemove
+				this.y = event.clientY;
+			},
+			reset() {
+				this.contador = 0;
+				this.x = 0;
+				this.y = 0;
+			}
+		}
+	})
+</script>
