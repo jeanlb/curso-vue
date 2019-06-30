@@ -9,7 +9,11 @@
   		<span v-on:mousemove.stop.prevent>Parar aqui!!!!</span>
   </p>
   <button v-on:click="reset">Reset</button>
-  <p><input type="text" v-on:keyup.enter="exibirAlerta"></p>
+  <p><input type="text" id="textoAlerta" v-on:keyup.enter="exibirAlerta"></p>
+  <input type="text" id="textoValor" v-on:keydown="valor = $event.target.value" />
+  <p>{{ valor }}</p>
+  <input type="text" id="textoValorOnEnter" v-on:keydown.enter="alterarValor" />
+  <p>{{ valor }}</p>
 </div>
 
 <script>
@@ -18,7 +22,8 @@
 		data: {
 			contador: 0,
 			x: 0,
-			y: 0
+			y: 0,
+			valor: ''
 		},
 		methods: {
 			incrementar() {
@@ -33,10 +38,17 @@
 				this.x = event.clientX; //propriedade referente a posicao do mouse no evento mousemove
 				this.y = event.clientY;
 			},
+			alterarValor(event) {
+				this.valor = event.target.value;
+			},
 			reset() {
 				this.contador = 0;
 				this.x = 0;
 				this.y = 0;
+				this.valor = '';
+				document.getElementById('textoAlerta').value = '';
+				document.getElementById('textoValor').value = '';
+				document.getElementById('textoValorOnEnter').value = '';
 			},
 			exibirAlerta() {
 				alert('Você teclou Enter!');
